@@ -15,7 +15,7 @@ import logopic2 from "../assets/cl2.png";
 import logopic3 from "../assets/cl3.png";
 import logopic4 from "../assets/cl4.png";
 
-import { Card, Typography, Avatar, Box, Rating } from "@mui/material";
+import { Card, Typography, Avatar, Box, Rating, useMediaQuery } from "@mui/material";
 
 const testimonials = [
   {
@@ -54,6 +54,8 @@ const testimonials = [
 
 export default function TestimonialsCarousel() {
   const swiperRef = React.useRef(null); // Create a reference to the swiper instance
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery((theme) => theme.breakpoints.between('sm', 'md'));
 
   return (
     <Box sx={{ py: 8, textAlign: "center", maxWidth: "1200px", mx: "auto", position: "relative" }}>
@@ -78,7 +80,7 @@ export default function TestimonialsCarousel() {
         ref={swiperRef}
         modules={[Navigation, Pagination]}
         spaceBetween={20}
-        slidesPerView={3}
+        slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
         navigation={{
           prevEl: ".swiper-button-prev",
           nextEl: ".swiper-button-next",
@@ -91,8 +93,8 @@ export default function TestimonialsCarousel() {
           <SwiperSlide key={index}>
             <Card
               sx={{
-                minHeight: 350,
-                height: 350,
+                minHeight: isMobile ? 300 : 350,
+                height: isMobile ? 300 : 350,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -145,37 +147,39 @@ export default function TestimonialsCarousel() {
       </Swiper>
 
       {/* Custom Navigation Arrows outside of Swiper */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-          transform: "translateY(-50%)",
-        }}
-      >
+      {!isMobile && !isTablet && (
         <Box
-          className="swiper-button-prev"
           sx={{
-            color: "#000188",
             position: "absolute",
-            left: "-100px",
-            zIndex: 10,
-            cursor: "pointer",
+            top: "50%",
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            transform: "translateY(-50%)",
           }}
-        />
-        <Box
-          className="swiper-button-next"
-          sx={{
-            color: "#000188",
-            position: "absolute",
-            right: "-100px",
-            zIndex: 10,
-            cursor: "pointer",
-          }}
-        />
-      </Box>
+        >
+          <Box
+            className="swiper-button-prev"
+            sx={{
+              color: "#000188",
+              position: "absolute",
+              left: "-100px",
+              zIndex: 10,
+              cursor: "pointer",
+            }}
+          />
+          <Box
+            className="swiper-button-next"
+            sx={{
+              color: "#000188",
+              position: "absolute",
+              right: "-100px",
+              zIndex: 10,
+              cursor: "pointer",
+            }}
+          />
+        </Box>
+      )}
 
       {/* Custom Styles for Pagination Dots */}
       <style>
