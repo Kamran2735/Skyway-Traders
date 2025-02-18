@@ -5,9 +5,9 @@ import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import slide1 from "../assets/Slide1.png";
-import slide2 from "../assets/Slide2.jpg";
-import slide3 from "../assets/Slide3.jpg";
+import slide1 from "../assets/slide-2.jpg";
+import slide2 from "../assets/slide-1.jpg";
+import slide3 from "../assets/slide-3.jpg";
 
 const slides = [
   { image: slide1, text: "Discover Our Latest Collection", link: "/products" },

@@ -25,28 +25,28 @@ const SearchBar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#000188", padding: "10px 150px" }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#000188", padding: "0px 100px", minHeight: "40px" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: "40x" }}>
 
         {/* Categories Dropdown */}
-        <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <Button
             onClick={handleMenuOpen}
-            endIcon={<ArrowDropDownIcon />}
+            endIcon={<ArrowDropDownIcon sx={{ fontSize: "14px" }} />}
             sx={{
               color: "#fff",
               fontWeight: "bold",
               textTransform: "none",
-              fontSize: "1.2rem",
-              padding: "10px 20px",
-              border: "2px solid #4C4CC4",
-              boxShadow: "0 0 10px #4C4CC4",
-              borderRadius: "5px",
+              fontSize: "0.8rem",
+              padding: "4px 10px",
+              border: "1px solid #4C4CC4",
+              boxShadow: "0 0 5px #4C4CC4",
+              borderRadius: "4px",
               transition: "all 0.3s ease",
               "&:hover": { backgroundColor: "#4C4CC4" },
             }}
           >
-            Product Categories
+            Categories
           </Button>
 
           {/* Categories Dropdown Menu */}
@@ -61,11 +61,9 @@ const SearchBar = () => {
                 key={category}
                 onClick={() => handleMenuClose(category)}
                 sx={{
+                  fontSize: "0.8rem",
                   transition: "all 0.3s ease",
-                  "&:hover": {
-                    backgroundColor: "#000188",
-                    color: "#ffffff"
-                  }
+                  "&:hover": { backgroundColor: "#000188", color: "#ffffff" },
                 }}
               >
                 {category}
@@ -74,19 +72,19 @@ const SearchBar = () => {
           </Menu>
         </Box>
 
-        {/* Search Bar */}
-        <Box sx={{ display: "flex", alignItems: "center", backgroundColor: "#ddd", borderRadius: "5px", padding: "4px 12px", width: "60%" }}>
+        {/* Search Bar - Slimmer & Shorter */}
+        <Box sx={{ display: "flex", alignItems: "center", backgroundColor: "#ddd", borderRadius: "4px", padding: "2px 6px", width: "50%" }}>
           <Button
             onClick={handleMenuOpen}
-            endIcon={<ArrowDropDownIcon />}
+            endIcon={<ArrowDropDownIcon sx={{ fontSize: "14px" }} />}
             sx={{
               backgroundColor: "#4C4CC4",
-              padding: "8px 12px",
-              borderRadius: "5px 0 0 5px",
+              padding: "4px 8px",
+              borderRadius: "4px 0 0 4px",
               color: "#ffffff",
-              fontSize: "1.2rem",
+              fontSize: "0.8rem",
               fontWeight: "bold",
-              minWidth: "140px",
+              minWidth: "90px",
               transition: "all 0.3s ease",
               "&:hover": { backgroundColor: "#000188" },
             }}
@@ -106,11 +104,9 @@ const SearchBar = () => {
                 key={category}
                 onClick={() => handleMenuClose(category)}
                 sx={{
+                  fontSize: "0.8rem",
                   transition: "all 0.3s ease",
-                  "&:hover": {
-                    backgroundColor: "#000188",
-                    color: "#ffffff"
-                  }
+                  "&:hover": { backgroundColor: "#000188", color: "#ffffff" },
                 }}
               >
                 {category}
@@ -124,39 +120,39 @@ const SearchBar = () => {
             placeholder={`Search in ${selectedCategory}`}
             sx={{
               flex: 1,
-              padding: "6px 12px",
+              padding: "2px 8px",
               backgroundColor: "#fff",
-              fontSize: "1.2rem",
+              fontSize: "0.8rem",
             }}
           />
           <IconButton
             onClick={handleSearch}
             sx={{
               backgroundColor: "#4C4CC4",
-              borderRadius: "0 5px 5px 0",
-              padding: "10px",
+              borderRadius: "0 4px 4px 0",
+              padding: "6px",
               transition: "all 0.3s ease",
               "&:hover": { backgroundColor: "#000188" },
             }}
           >
-            <SearchIcon sx={{ color: "#fff", fontSize: "2rem" }} />
+            <SearchIcon sx={{ color: "#fff", fontSize: "1.3rem" }} />
           </IconButton>
         </Box>
 
         {/* Quote Cart Button */}
         <Button
           variant="text"
-          startIcon={<ShoppingCartIcon fontSize="large" />}
+          startIcon={<ShoppingCartIcon fontSize="small" />}
           sx={{
             color: "#fff",
             fontWeight: "bold",
             textTransform: "none",
-            fontSize: "1.2rem",
+            fontSize: "0.8rem",
             height: "100%",
-            border: "2px solid #4C4CC4",
-            boxShadow: "0 0 10px #4C4CC4",
-            borderRadius: "5px",
-            padding: "10px 20px",
+            border: "1px solid #4C4CC4",
+            boxShadow: "0 0 5px #4C4CC4",
+            borderRadius: "4px",
+            padding: "4px 8px",
             transition: "all 0.3s ease",
             "&:hover": { backgroundColor: "#4C4CC4" },
           }}

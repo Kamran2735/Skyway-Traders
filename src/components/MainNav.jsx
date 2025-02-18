@@ -18,7 +18,7 @@ const MainNav = () => {
   // Common styles for navbar items
   const navItemStyles = {
     cursor: "pointer",
-    fontSize: "23px",
+    fontSize: "18px", // ✅ Reduced from 23px
     fontWeight: "bold",
     transition: "color 0.3s",
     "&:hover": { color: "#4C4CC4" },
@@ -26,22 +26,22 @@ const MainNav = () => {
 
   // Common styles for dropdown items
   const menuItemStyles = {
-    fontSize: "20px",
+    fontSize: "16px", // ✅ Reduced from 20px
     transition: "background-color 0.3s, color 0.3s",
     "&:hover": { backgroundColor: "#000188", color: "white" },
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#ffffff", color: "#000188", padding: "0 200px" }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#ffffff", color: "#000188", padding: "0 100px", height: "55px" }}> {/* ✅ Reduced padding & height */}
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "55px" }}> {/* ✅ Adjusted minHeight */}
         
         {/* Logo */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <img src={logo} alt="Skyway Traders Logo" style={{ height: 100, width: "auto" }} />
+          <img src={logo} alt="Skyway Traders Logo" style={{ height: 60, width: "auto" }} /> {/* ✅ Reduced from 100px */}
         </Box>
 
         {/* Navigation Links */}
-        <Box sx={{ display: "flex", gap: 3 }}>
+        <Box sx={{ display: "flex", gap: 2 }}> {/* ✅ Reduced gap */}
           {/* Overview - Shows dropdown on hover */}
           <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <Typography variant="h6" sx={navItemStyles}>Overview</Typography>

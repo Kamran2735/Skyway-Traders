@@ -6,6 +6,9 @@ import SearchBar from "./components/SearchBar";
 import HeroSection from "./components/HeroSection";
 import InfoSection from "./components/InfoSection";
 import LatestProducts from "./components/LatestProducts";
+import Testimonials from "./components/Testimonials";
+import ProductCategory from "./components/ProductCategory";
+
 const App = () => {
   return (
     <Router>
@@ -15,6 +18,8 @@ const App = () => {
       <HeroSection />
       <InfoSection />
       <LatestProducts />
+      <Testimonials />
+      <ProductCategory />
       {/* Define your routes here if needed */}
       <Routes>
         <Route path="/" element={<div>Home Page</div>} />
