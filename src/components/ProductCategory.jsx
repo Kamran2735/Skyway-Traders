@@ -84,10 +84,8 @@ const ProductCategory = () => {
           fontWeight="bold"
           gutterBottom
           sx={{
-            fontSize: "1.1rem",
+            fontSize: "1.2rem",
             color: "#4C9BE8", // Light Blue for visibility
-            textDecoration: "underline",
-            textDecorationColor: "#000188", // Changed to dark blue
             pb: 2,
           }}
         >

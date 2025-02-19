@@ -9,6 +9,8 @@ import InfoSection from "./components/InfoSection";
 import LatestProducts from "./components/LatestProducts";
 import Testimonials from "./components/Testimonials";
 import ProductCategory from "./components/ProductCategory";
+import FaqAndNews from "./components/FaqAndNews";
+import ContactUs from "./components/ContactUs";
 
 const theme = createTheme();
 
@@ -24,6 +26,8 @@ const App = () => {
         <LatestProducts />
         <Testimonials />
         <ProductCategory />
+        <FaqAndNews />
+        <ContactUs />
         {/* Define your routes here if needed */}
         <Routes>
           <Route path="/" element={<div>Home Page</div>} />
