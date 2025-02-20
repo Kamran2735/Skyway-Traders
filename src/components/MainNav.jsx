@@ -62,7 +62,7 @@ const MainNav = () => {
             </Box>
             <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
               <List>
-                <ListItem button onClick={() => { navigate("/overview"); setDrawerOpen(false); }}>
+                <ListItem onClick={() => { navigate("/Overview"); setDrawerOpen(false); }}>
                   <ListItemText primary="Overview" />
                 </ListItem>
                 {overviewOptions.map((option) => (
@@ -91,8 +91,8 @@ const MainNav = () => {
             </Box>
             <Box sx={{ display: "flex", gap: isTablet ? 2 : 2, flexDirection: "row", alignItems: "center" }}> {/* ✅ Adjusted gap and flexDirection for tablet */}
               {/* Overview - Shows dropdown on hover */}
-              <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                <Typography variant="h6" sx={navItemStyles} onClick={() => navigate("/overview")}>Overview</Typography>
+              <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={() => navigate("/overview")}>
+                <Typography variant="h6" sx={navItemStyles}>Overview</Typography>
                 <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMouseLeave}>
                   <MenuItem onClick={() => { navigate("/about"); handleMouseLeave(); }} sx={menuItemStyles}>About Us</MenuItem>
                   <MenuItem onClick={() => { navigate("/services"); handleMouseLeave(); }} sx={menuItemStyles}>Services</MenuItem>
@@ -100,13 +100,13 @@ const MainNav = () => {
                 </Menu>
               </Box>
 
-              <Typography variant="h6" sx={navItemStyles} onClick={() => navigate("/new-arrivals")}>
+              <Typography variant="h6" sx={navItemStyles} onClick={() => navigate("/New-arrivals")}>
                 New Arrivals
               </Typography>
-              <Typography variant="h6" sx={navItemStyles} onClick={() => navigate("/products")}>
+              <Typography variant="h6" sx={navItemStyles} onClick={() => navigate("/Products")}>
                 Products
               </Typography>
-              <Typography variant="h6" sx={navItemStyles} onClick={() => navigate("/contact")}>
+              <Typography variant="h6" sx={navItemStyles} onClick={() => navigate("/Contact")}>
                 Contact
               </Typography>
             </Box>
