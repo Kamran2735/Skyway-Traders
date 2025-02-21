@@ -6,12 +6,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Import Images
-import slide1 from "../assets/NA1.webp";
+import slide1 from "../assets/NA1.jpg";
 import slide2 from "../assets/NA2.jpg";
-import slide3 from "../assets/NA3.jpg";
 import bannerImg from "../assets/NA4.webp";
 
-const slides = [slide1, slide2, slide3];
+const slides = [slide1, slide2];
 
 const CustomPrevArrow = (props) => {
   const { onClick } = props;
@@ -83,8 +82,8 @@ const HeroSection = () => {
         alignItems: "center",
         maxWidth: "1200px",
         mx: "auto",
-        mt: 1.5, 
-        mb: 1.5, 
+        mt: 2, 
+        mb: 2, 
       }}
     >
       {/* Left Side - Image Slider */}

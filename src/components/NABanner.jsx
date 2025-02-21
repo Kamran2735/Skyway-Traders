@@ -12,8 +12,8 @@ const BannerSection = () => {
         maxWidth: "1200px",
         mx: "auto",
         gap: 2, // Adds spacing between banners
-        mt: 1.5, // Adds margin at the top
-        mb: 1.5, // Adds margin at the bottom
+        mt: 2, // Adds margin at the top
+        mb: 2, // Adds margin at the bottom
       }}
     >
       {/* Left Banner (30%) */}

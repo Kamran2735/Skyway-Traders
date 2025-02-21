@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Home from "./pages/Home"; // ✅ Import the Home component
 import Overview from "./pages/Overview"; // ✅ Import the Overview component
+import About from "./pages/About";
+import Category from "./pages/Category"; // ✅ Import the Category component
 import New_Arrivals from "./pages/New_Arrivals";
 import Contact from "./pages/Contact"; // ✅ Import the Contact component
 import Team from "./pages/Team"; // ✅ Import the Team component
@@ -16,6 +18,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/Overview" element={<Overview />}/>
+          <Route path="/About" element={<About />}/>
+          <Route path="/Category" element={<Category />}/>
           <Route path="/New_Arrivals" element={<New_Arrivals />}/>
           <Route path="/Contact" element={<Contact />}/>
           <Route path="/Team" element={<Team />}/>

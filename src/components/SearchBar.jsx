@@ -3,26 +3,50 @@ import { AppBar, Toolbar, Box, Menu, MenuItem, Button, InputBase, IconButton, us
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useNavigate } from "react-router-dom";
 
 const categories = ["All", "Category 1", "Category 2", "Category 3", "Category 4"];
 
 const SearchBar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  const [menuAnchor, setMenuAnchor] = useState(null); // For "Product Categories"
+  const [searchMenuAnchor, setSearchMenuAnchor] = useState(null); // For dropdown in search field
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTablet = useMediaQuery("(min-width:601px) and (max-width:960px)");
 
+  // ✅ Handle first dropdown menu (Product Categories)
   const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setMenuAnchor(event.currentTarget);
   };
 
   const handleMenuClose = (category) => {
     setSelectedCategory(category);
-    setAnchorEl(null);
+    setMenuAnchor(null);
+
+    // ✅ Navigate based on selection
+    if (category === "All") {
+      navigate("/category");
+    } else {
+      navigate(`/category/${category.toLowerCase().replace(/\s+/g, "-")}`);
+    }
   };
 
+  // ✅ Handle search dropdown menu
+  const handleSearchMenuOpen = (event) => {
+    setSearchMenuAnchor(event.currentTarget);
+  };
+
+  const handleSearchMenuClose = (category) => {
+    if (category) {
+      setSelectedCategory(category);
+    }
+    setSearchMenuAnchor(null);
+  };
+
+  // ✅ Handle search action
   const handleSearch = () => {
     console.log(`Searching for "${searchQuery}" in "${selectedCategory}" category`);
   };
@@ -46,7 +70,7 @@ const SearchBar = () => {
           gap: isMobile ? 1 : 0,
         }}
       >
-        {/* ✅ REMOVE OUTSIDE "PRODUCT CATEGORIES" DROPDOWN ON MOBILE */}
+        {/* ✅ First Dropdown: Product Categories */}
         {!isMobile && (
           <Button
             onClick={handleMenuOpen}
@@ -68,7 +92,28 @@ const SearchBar = () => {
           </Button>
         )}
 
-        {/* ✅ Search Bar - Adjusted for Mobile */}
+        <Menu
+          anchorEl={menuAnchor}
+          open={Boolean(menuAnchor)}
+          onClose={() => setMenuAnchor(null)}
+          sx={{ "& .MuiPaper-root": { minWidth: menuAnchor ? menuAnchor.offsetWidth : "auto" } }}
+        >
+          {categories.map((category) => (
+            <MenuItem
+              key={category}
+              onClick={() => handleMenuClose(category)}
+              sx={{
+                fontSize: "0.8rem",
+                transition: "all 0.3s ease",
+                "&:hover": { backgroundColor: "#000188", color: "#ffffff" },
+              }}
+            >
+              {category}
+            </MenuItem>
+          ))}
+        </Menu>
+
+        {/* ✅ Search Bar */}
         <Box
           sx={{
             display: "flex",
@@ -79,8 +124,9 @@ const SearchBar = () => {
             width: isMobile ? "100%" : "50%",
           }}
         >
+          {/* ✅ Dropdown inside Search Field */}
           <Button
-            onClick={handleMenuOpen}
+            onClick={handleSearchMenuOpen}
             endIcon={<ArrowDropDownIcon sx={{ fontSize: "14px" }} />}
             sx={{
               backgroundColor: "#4C4CC4",
@@ -98,15 +144,15 @@ const SearchBar = () => {
           </Button>
 
           <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
-            sx={{ "& .MuiPaper-root": { minWidth: anchorEl ? anchorEl.offsetWidth : "auto" } }}
+            anchorEl={searchMenuAnchor}
+            open={Boolean(searchMenuAnchor)}
+            onClose={() => setSearchMenuAnchor(null)}
+            sx={{ "& .MuiPaper-root": { minWidth: searchMenuAnchor ? searchMenuAnchor.offsetWidth : "auto" } }}
           >
             {categories.map((category) => (
               <MenuItem
                 key={category}
-                onClick={() => handleMenuClose(category)}
+                onClick={() => handleSearchMenuClose(category)}
                 sx={{
                   fontSize: "0.8rem",
                   transition: "all 0.3s ease",
@@ -118,6 +164,7 @@ const SearchBar = () => {
             ))}
           </Menu>
 
+          {/* ✅ Search Input */}
           <InputBase
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -143,7 +190,7 @@ const SearchBar = () => {
           </IconButton>
         </Box>
 
-        {/* ✅ REMOVE CART BUTTON ON MOBILE */}
+        {/* ✅ Cart Button (Hidden on Mobile) */}
         {!isMobile && (
           <Button
             variant="text"
@@ -164,13 +211,6 @@ const SearchBar = () => {
           >
             Cart
           </Button>
-        )}
-
-        {/* ✅ REMOVE MENU ICON (☰) ON MOBILE */}
-        {false && (
-          <IconButton edge="end" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
         )}
       </Toolbar>
     </AppBar>

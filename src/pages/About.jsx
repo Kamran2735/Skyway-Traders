@@ -1,18 +1,18 @@
 import React from "react";
 import Header from "../components/Header";
-import InfoSection from "../components/InfoSection";
+import AboutUs from "../components/AboutUs";
 import Footer from "../components/Footer";  
 
 
 
-const Overview = () => {
+const About = () => {
     return (
         <>
         <Header />
-        <InfoSection />
+        <AboutUs />
         <Footer />
         </>
       );
     };
     
-export default Overview;
+export default About;
