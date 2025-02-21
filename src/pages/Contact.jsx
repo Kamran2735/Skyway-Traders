@@ -1,7 +1,5 @@
 import React from "react";
-import TopBar from "../components/TopBar";
-import MainNav from "../components/MainNav";
-import SearchBar from "../components/SearchBar";
+import Header from "../components/Header";
 import ContactUs from "../components/ContactUs";
 import Footer from "../components/Footer";
 import ContactHero from "../components/ContactHero";
@@ -11,9 +9,7 @@ import Map from "../components/Map";
 const Contact = () => {
     return (
         <>
-        <TopBar />
-        <MainNav />
-        <SearchBar />
+        <Header />
         <ContactHero />
         <ContactUs />
         <Map />

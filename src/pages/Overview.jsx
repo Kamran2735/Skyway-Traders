@@ -1,7 +1,5 @@
 import React from "react";
-import TopBar from "../components/TopBar";
-import MainNav from "../components/MainNav";
-import SearchBar from "../components/SearchBar";
+import Header from "../components/Header";
 import InfoSection from "../components/InfoSection";  
 
 
@@ -9,9 +7,7 @@ import InfoSection from "../components/InfoSection";
 const Overview = () => {
     return (
         <>
-        <TopBar />
-        <MainNav />
-        <SearchBar />
+        <Header />
         <InfoSection />
         </>
       );

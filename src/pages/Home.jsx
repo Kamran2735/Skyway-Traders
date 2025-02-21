@@ -1,7 +1,5 @@
 import React from "react";
-import TopBar from "../components/TopBar";
-import MainNav from "../components/MainNav";
-import SearchBar from "../components/SearchBar";
+import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import InfoSection from "../components/InfoSection";
 import LatestProducts from "../components/LatestProducts";
@@ -15,9 +13,7 @@ import Footer from "../components/Footer";
 const Home = () => {
     return (
         <>
-        <TopBar />
-        <MainNav />
-        <SearchBar />
+        <Header />
         <HeroSection />
         <InfoSection />
         <LatestProducts />
