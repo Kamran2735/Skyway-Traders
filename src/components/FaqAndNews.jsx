@@ -118,7 +118,7 @@ const FaqAndNews = () => {
               <AccordionDetails
                 sx={{
                   padding: "20px",
-                  backgroundColor: "#000188", // ✅ Dark blue background for answer
+                  background: "linear-gradient(135deg, #000188,#6a11cb)",
                   color: "#fff", // ✅ White text
                   borderRadius: "0 0 8px 8px",
                 }}
@@ -154,7 +154,7 @@ const FaqAndNews = () => {
                 boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
                 borderRadius: "8px",
                 overflow: "hidden",
-                backgroundColor: "#000188", // ✅ Dark blue background for news box
+                background: "linear-gradient(135deg, #6a11cb,#000188)",
                 color: "#fff", // ✅ White text
               }}
             >

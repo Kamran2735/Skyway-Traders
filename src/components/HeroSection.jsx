@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Slider from "react-slick";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { motion } from "framer-motion";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -57,13 +58,24 @@ const HeroSection = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              overflow: "hidden",
             }}
           >
-            <img
+            {/* Background Image with Zoom Effect */}
+            <motion.img
               src={slide.image}
               alt={`Slide ${index + 1}`}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+              initial={{ scale: 1.2 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 1, ease: "easeOut" }}
             />
+
+            {/* Overlay with Hover Effect */}
             <Box
               component="a"
               href={slide.link}
@@ -84,21 +96,28 @@ const HeroSection = () => {
                 },
               }}
             >
-<Typography
-  variant="h4"
-  sx={{
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
-    paddingX: 40, // Horizontal padding
-    paddingY: 20, // Vertical padding
-    transition: "transform 0.3s ease",
-    "&:hover": { transform: "scale(1.1)" },
-  }}
->
-  {slide.text}
-</Typography>
-
+              {/* Animated Text */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              >
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: "#fff",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    px: { xs: 4, md: 40 }, // Adjust horizontal padding for responsiveness
+                    py: 2, // Vertical padding
+                    transition: "transform 0.3s ease",
+                    "&:hover": { transform: "scale(1.1)" },
+                    fontSize: { xs: "1.5rem", md: "2.5rem" }, // Responsive font sizes
+                  }}
+                >
+                  {slide.text}
+                </Typography>
+              </motion.div>
             </Box>
           </Box>
         ))}

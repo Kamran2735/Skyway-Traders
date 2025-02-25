@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(180deg, #000188 60%, #12123D 100%)",
+        background: "linear-gradient(180deg, #000188 60%, #4C4CC4 100%)",
         color: "#fff",
         py: 6,
         px: isMobile ? 3 : 5, // ✅ Reduced padding to keep inline

@@ -5,9 +5,10 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Box, Typography, useMediaQuery } from "@mui/material";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
-import { Box, Typography, useMediaQuery, IconButton } from "@mui/material";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import slide1 from "../assets/product-1.jpg";
 import slide2 from "../assets/product-2.jpeg";
 import slide3 from "../assets/product-3.jpg";
@@ -24,157 +25,167 @@ const products = [
 ];
 
 const LatestProducts = () => {
-  const navigate = useNavigate(); // React Router navigation
+  const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 600px)");
   const isTablet = useMediaQuery("(min-width: 600px) and (max-width: 960px)");
 
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+
   return (
-    <Box
-      sx={{
-        position: "relative",
-        textAlign: "center",
-        py: 4,
-        backgroundImage: `url(${backgroundImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-        color: "#fff",
-      }}
-    >
-      {/* Dark Overlay */}
+    <motion.div ref={ref} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1 }}>
       <Box
         sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.6)", // Dark overlay
-          zIndex: 1,
+          position: "relative",
+          textAlign: "center",
+          py: 4,
+          backgroundImage: `url(${backgroundImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          color: "#fff",
         }}
-      />
-
-      {/* Content Wrapper */}
-      <Box sx={{ position: "relative", zIndex: 2 }}>
-        {/* Section Title */}
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          gutterBottom
+      >
+        {/* Dark Overlay */}
+        <Box
           sx={{
-            fontSize: "1.2rem",
-            color: "#4C9BE8",
-            pb: 2,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.6)", // Dark overlay
+            zIndex: 1,
           }}
-        >
-          Our Latest Collection
-        </Typography>
-        <Typography variant="h4" sx={{ pb: 0, fontWeight: "bold" }}>
-          Explore Our New Arrivals
-        </Typography>
+        />
 
-        {/* Slider Section */}
-        <Box sx={{ width: isMobile ? "100%" : "80%", margin: "0 auto", position: "relative", pb: 0 }}>
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={0} // Decreased space between cards
-            slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
-            // navigation={!isMobile && !isTablet} // Arrows only for desktop
-            pagination={{ clickable: true }}
-            loop={true}
-            autoplay={{ delay: 5000 }}
-            style={{ paddingBottom: "40px" }}
-          >
-            {products.map((product, index) => (
-              <SwiperSlide key={index}>
-                <Box
-                  sx={{
-                    px: 1,
-                    textAlign: "center",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => navigate(product.link)}
-                >
-                  <Box
-                    sx={{
-                      position: "relative",
-                      width: "100%",
-                      aspectRatio: "2 / 3",
-                      borderRadius: "12px",
-                      overflow: "hidden",
-                      backgroundColor: "#f8f9fa",
-                      transform: "scale(0.85)",
-                      transition: "transform 0.5s ease-in-out",
-                      zIndex: 1,
-                      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)", // Normal shadow
-                      "&:hover": {
-                        transform: "scale(1)",
-                        boxShadow: "0px 0px 15px 4px #4C4CC4", // Neon Outline Effect
-                      },
-                    }}
+        {/* Content Wrapper */}
+        <Box sx={{ position: "relative", zIndex: 2 }}>
+          {/* Section Title */}
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={inView ? { y: 0, opacity: 1 } : {}} transition={{ duration: 0.8 }}>
+            <Typography
+              variant="h6"
+              fontWeight="bold"
+              gutterBottom
+              sx={{
+                fontSize: "1.2rem",
+                color: "#4C9BE8",
+                pb: 2,
+              }}
+            >
+              Our Latest Collection
+            </Typography>
+            <Typography variant="h4" sx={{ pb: 0, fontWeight: "bold" }}>
+              Explore Our New Arrivals
+            </Typography>
+          </motion.div>
+
+          {/* Slider Section */}
+          <Box sx={{ width: isMobile ? "100%" : "80%", margin: "0 auto", position: "relative", pb: 0 }}>
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={0}
+              slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
+              pagination={{ clickable: true }}
+              loop={true}
+              autoplay={{ delay: 5000 }}
+              style={{ paddingBottom: "40px" }}
+            >
+              {products.map((product, index) => (
+                <SwiperSlide key={index}>
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={inView ? { y: 0, opacity: 1 } : {}}
+                    transition={{ duration: 0.8, delay: index * 0.2 }}
                   >
-                    <img
-                      src={product.img}
-                      alt={product.title}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "12px" }}
-                    />
                     <Box
                       sx={{
-                        position: "absolute",
-                        bottom: 0,
-                        width: "100%",
-                        p: 2,
-                        background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent)",
+                        px: 1,
+                        textAlign: "center",
+                        cursor: "pointer",
                       }}
+                      onClick={() => navigate(product.link)}
                     >
-                      <Typography
-                        variant="h6"
+                      <Box
                         sx={{
-                          color: "white",
-                          fontWeight: "bold",
-                          transition: "transform 0.3s ease-in-out",
+                          position: "relative",
+                          width: "100%",
+                          aspectRatio: "2 / 3",
+                          borderRadius: "12px",
+                          overflow: "hidden",
+                          backgroundColor: "#f8f9fa",
+                          transform: "scale(0.85)",
+                          transition: "transform 0.5s ease-in-out",
+                          zIndex: 1,
+                          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)", // Normal shadow
                           "&:hover": {
-                            transform: "translateY(-5px)",
+                            transform: "scale(1)",
+                            boxShadow: "0px 0px 15px 4px #4C4CC4", // Neon Outline Effect
                           },
                         }}
                       >
-                        {product.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: "#4C9BE8",
-                          fontWeight: "500",
-                          transition: "transform 0.3s ease-in-out",
-                          "&:hover": {
-                            transform: "translateY(-5px)",
-                          },
-                        }}
-                      >
-                        {product.category}
-                      </Typography>
+                        <img
+                          src={product.img}
+                          alt={product.title}
+                          style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "12px" }}
+                        />
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            bottom: 0,
+                            width: "100%",
+                            p: 2,
+                            background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent)",
+                          }}
+                        >
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              color: "white",
+                              fontWeight: "bold",
+                              transition: "transform 0.3s ease-in-out",
+                              "&:hover": {
+                                transform: "translateY(-5px)",
+                              },
+                            }}
+                          >
+                            {product.title}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: "#4C9BE8",
+                              fontWeight: "500",
+                              transition: "transform 0.3s ease-in-out",
+                              "&:hover": {
+                                transform: "translateY(-5px)",
+                              },
+                            }}
+                          >
+                            {product.category}
+                          </Typography>
+                        </Box>
+                      </Box>
                     </Box>
-                  </Box>
-                </Box>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                  </motion.div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Box>
         </Box>
 
-     </Box>
-
-      {/* Custom Styles for Pagination Dots */}
-      <style>
-        {`
-          .swiper-pagination-bullet {
-            background-color: #ffffff !important; /* Inactive dot color */
-          }
-          .swiper-pagination-bullet-active {
-            background-color: #000188 !important; /* Active dot color */
-          }
-        `}
-      </style>
-    </Box>
+        {/* Custom Styles for Pagination Dots */}
+        <style>
+          {`
+            .swiper-pagination-bullet {
+              backgroundColor: #fffff; /* Inactive dot color */
+            }
+            .swiper-pagination-bullet-active {
+              background: linear-gradient(135deg, #6a11cb,#000188); !important; /* Active dot color */
+            }
+          `}
+        </style>
+      </Box>
+    </motion.div>
   );
 };
 

@@ -10,7 +10,7 @@ const navOptions = ["Overview", "New Arrivals", "Products", "Contact"];
 const overviewOptions = [
   { label: "Company Overview", path: "/Overview" },
   { label: "About Us", path: "/About" },
-  { label: "Services", path: "/Services" },
+  { label: "Why Choose Us", path: "/Why_Choose_Us" },
   { label: "Team", path: "/Team" }
 ];
 

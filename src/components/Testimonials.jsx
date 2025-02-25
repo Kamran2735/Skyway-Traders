@@ -4,6 +4,9 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Card, Typography, Avatar, Box, Rating, useMediaQuery } from "@mui/material";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import pic1 from "../assets/person-1.png";
 import pic2 from "../assets/person-2.png";
@@ -14,8 +17,6 @@ import logopic1 from "../assets/cl1.png";
 import logopic2 from "../assets/cl2.png";
 import logopic3 from "../assets/cl3.png";
 import logopic4 from "../assets/cl4.png";
-
-import { Card, Typography, Avatar, Box, Rating, useMediaQuery } from "@mui/material";
 
 const testimonials = [
   {
@@ -53,142 +54,127 @@ const testimonials = [
 ];
 
 export default function TestimonialsCarousel() {
-  const swiperRef = React.useRef(null); // Create a reference to the swiper instance
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery((theme) => theme.breakpoints.between('sm', 'md'));
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isTablet = useMediaQuery("(min-width: 600px) and (max-width: 960px)");
+
+  const { ref: headingRef, inView: headingInView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
     <Box sx={{ py: 8, textAlign: "center", maxWidth: "1200px", mx: "auto", position: "relative" }}>
-      <Typography
-        variant="h6" 
-        fontWeight="bold"
-        gutterBottom
-        sx={{
-          fontSize: '1.1rem',
-          color: '#000188',
-          textDecoration: 'underline',
-          textDecorationColor: '#000188',
-          paddingBottom: '10px',
-        }}
+      {/* Heading and Subheading Animation */}
+      <motion.div
+        ref={headingRef}
+        initial={{ y: 50, opacity: 0 }}
+        animate={headingInView ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
       >
-        Testimonials
-      </Typography>
-      <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ paddingBottom: '20px' }}>
-        Words From Our Customers
-      </Typography>
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          gutterBottom
+          sx={{
+            fontSize: "1.1rem",
+            color: "#000188",
+            textDecoration: "underline",
+            textDecorationColor: "#000188",
+            paddingBottom: "10px",
+          }}
+        >
+          Testimonials
+        </Typography>
+        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ paddingBottom: "20px" }}>
+          Words From Our Customers
+        </Typography>
+      </motion.div>
+
       <Swiper
-        ref={swiperRef}
         modules={[Navigation, Pagination]}
         spaceBetween={20}
         slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
-        navigation={{
-          prevEl: ".swiper-button-prev",
-          nextEl: ".swiper-button-next",
-        }}
         pagination={{ clickable: true }}
         loop={true}
         style={{ paddingBottom: "50px" }}
       >
-        {testimonials.map((testimonial, index) => (
-          <SwiperSlide key={index}>
-            <Card
-              sx={{
-                minHeight: isMobile ? 300 : 350,
-                height: isMobile ? 300 : 350,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                p: 3,
-                boxShadow: 3,
-                borderRadius: 3,
-              }}
-            >
-              <Avatar src={testimonial.image} sx={{ width: 70, height: 70, mb: 2 }} />
-              <Typography variant="h6" fontWeight="bold">
-                {testimonial.name}
-              </Typography>
-              <Typography variant="body2" color="#000188" sx={{ mb: 1 }}>
-                {testimonial.position}
-              </Typography>
+        {testimonials.map((testimonial, index) => {
+          const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
-              {/* Remark with fixed space allocation */}
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{
-                  mb: 2,
-                  flexGrow: 1,
-                  wordWrap: "break-word",
-                  whiteSpace: "normal",
-                }}
-              >
-                {testimonial.text}
-              </Typography>
+          // New animation sequence:
+          const animationVariants = [
+            { initial: { x: 50, opacity: 0 }, animate: { x: 0, opacity: 1 } }, // First: Slide from Right
+            { initial: { y: 50, opacity: 0 }, animate: { y: 0, opacity: 1 } }, // Second: Slide from Below
+            { initial: { x: -50, opacity: 0 }, animate: { x: 0, opacity: 1 } }, // Third: Slide from Left
+          ];
+          const variant = animationVariants[index % 3]; // Rotates the animations
 
-              {/* Stars always in the same position */}
-              <Rating value={testimonial.rating} precision={0.5} readOnly sx={{ mb: 2 }} />
+          return (
+            <SwiperSlide key={index}>
+              <motion.div ref={ref} initial={variant.initial} animate={inView ? variant.animate : {}} transition={{ duration: 0.8 }}>
+                <Card
+                  sx={{
+                    minHeight: isMobile ? 300 : 350,
+                    height: isMobile ? 300 : 350,
+                    display: "flex",
+                    background: "linear-gradient(135deg, #000188,#6a11cb)",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    textAlign: "center",
+                    p: 3,
+                    boxShadow: 3,
+                    borderRadius: 3,
+                  }}
+                >
+                  <Avatar src={testimonial.image} sx={{ width: 70, height: 70, mb: 2 }} />
+                  <Typography variant="h6" color="white" fontWeight="bold">
+                    {testimonial.name}
+                  </Typography>
+                  <Typography variant="body2" color="#4C9BE8" sx={{ mb: 1 }}>
+                    {testimonial.position}
+                  </Typography>
 
-              {/* Company Logo - no cropping */}
-              <Box
-                component="img"
-                src={testimonial.logo}
-                alt="Company Logo"
-                sx={{
-                  width: 80,
-                  height: 50,
-                  objectFit: "contain",
-                  mt: "auto",
-                }}
-              />
-            </Card>
-          </SwiperSlide>
-        ))}
+                  {/* Remark with fixed space allocation */}
+                  <Typography
+                    variant="body2"
+                    color="white"
+                    sx={{
+                      mb: 2,
+                      flexGrow: 1,
+                      wordWrap: "break-word",
+                      whiteSpace: "normal",
+                    }}
+                  >
+                    {testimonial.text}
+                  </Typography>
+
+                  {/* Stars always in the same position */}
+                  <Rating value={testimonial.rating} precision={0.5} readOnly sx={{ mb: 2 }} />
+
+                  {/* Company Logo - no cropping */}
+                  <Box
+                    component="img"
+                    src={testimonial.logo}
+                    alt="Company Logo"
+                    sx={{
+                      width: 80,
+                      height: 50,
+                      objectFit: "contain",
+                      mt: "auto",
+                    }}
+                  />
+                </Card>
+              </motion.div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
-
-      {/* Custom Navigation Arrows outside of Swiper */}
-      {!isMobile && !isTablet && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            transform: "translateY(-50%)",
-          }}
-        >
-          <Box
-            className="swiper-button-prev"
-            sx={{
-              color: "#000188",
-              position: "absolute",
-              left: "-100px",
-              zIndex: 10,
-              cursor: "pointer",
-            }}
-          />
-          <Box
-            className="swiper-button-next"
-            sx={{
-              color: "#000188",
-              position: "absolute",
-              right: "-100px",
-              zIndex: 10,
-              cursor: "pointer",
-            }}
-          />
-        </Box>
-      )}
 
       {/* Custom Styles for Pagination Dots */}
       <style>
         {`
           .swiper-pagination-bullet {
-            background-color: #000188 !important; /* Matches arrow color */
+            background: linear-gradient(135deg,#6a11cb, #000188); !important; /* Matches arrow color */
           }
           .swiper-pagination-bullet-active {
-            background-color: #000188 !important; /* Active dot color */
+            background: linear-gradient(135deg, #6a11cb,#000188); /* Active dot color */
           }
         `}
       </style>

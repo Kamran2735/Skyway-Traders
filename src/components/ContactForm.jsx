@@ -156,12 +156,12 @@ const ContactForm = () => {
               variant="contained"
               fullWidth
               sx={{
-                backgroundColor: "#000188", // ✅ Default color
+                background: "linear-gradient(135deg, #000188,#6a11cb)",
                 color: "#fff",
                 fontWeight: "bold",
                 borderRadius: "8px", // Rounded corners
                 boxShadow: "0px 4px 10px rgba(0,0,0,0.1)", // Light shadow
-                "&:hover": { backgroundColor: "#4C4CC4" }, // 
+                "&:hover": { background: "linear-gradient(135deg,#6a11cb, #000188)" }, // 
               }}
             >
               Send

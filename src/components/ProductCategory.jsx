@@ -1,8 +1,11 @@
 import React from "react";
-import { Box, Typography, Card, CardMedia } from "@mui/material";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Box, Typography, Card, CardMedia, IconButton } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import "swiper/css";
+import "swiper/css/pagination";
 import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import StorefrontIcon from "@mui/icons-material/Storefront";
@@ -23,44 +26,20 @@ const categories = [
 ];
 
 const ProductCategory = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    arrows: false, // Removes navigation arrows
-    customPaging: (i) => (
-      <Box
-        sx={{
-          width: "10px", // Slightly smaller dots
-          height: "10px",
-          borderRadius: "50%",
-          backgroundColor: "#D1D5DB", // Default grey color
-          transition: "background-color 0.3s ease",
-        }}
-      />
-    ),
-    dotsClass: "slick-dots custom-dots", // Custom class for styling
-    responsive: [
-      { breakpoint: 960, settings: { slidesToShow: 2 } },
-      { breakpoint: 600, settings: { slidesToShow: 1 } },
-    ],
-  };
+  const { ref: headingRef, inView: headingInView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { ref: contentRef, inView: contentInView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
     <Box
       sx={{
         position: "relative",
         textAlign: "center",
-        py: 8, // Keeping good spacing
-        backgroundImage: `url(${BgImage})`, // Background image
+        py: 8,
+        backgroundImage: `url(${BgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
-        color: "#fff", // White text for contrast
+        color: "#fff",
       }}
     >
       {/* Dark Overlay */}
@@ -71,113 +50,142 @@ const ProductCategory = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.6)", // Dark overlay
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
           zIndex: 1,
         }}
       />
 
       {/* Content Wrapper */}
       <Box sx={{ position: "relative", zIndex: 2 }}>
-        {/* Section Title */}
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          gutterBottom
-          sx={{
-            fontSize: "1.2rem",
-            color: "#4C9BE8", // Light Blue for visibility
-            pb: 2,
-          }}
+        {/* Heading & Subheading Animation */}
+        <motion.div
+          ref={headingRef}
+          initial={{ y: 50, opacity: 0 }}
+          animate={headingInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.8 }}
         >
-          Product Categories
-        </Typography>
-        <Typography variant="h4" sx={{ pb: 2, fontWeight: "bold", mb: 2 }}>
-          Browse Our Product Sectors
-        </Typography>
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            gutterBottom
+            sx={{
+              fontSize: "1.2rem",
+              color: "#4C9BE8",
+              pb: 2,
+            }}
+          >
+            Product Categories
+          </Typography>
+          <Typography variant="h4" sx={{ pb: 2, fontWeight: "bold", mb: 2 }}>
+            Browse Our Product Sectors
+          </Typography>
+        </motion.div>
 
-        {/* Slider Section */}
-        <Box sx={{ width: "80%", margin: "0 auto", position: "relative", pb: 8 }}>
-          <Slider {...settings}>
+        {/* Swiper Carousel */}
+        <Box sx={{ width: "85%", margin: "0 auto", position: "relative", pb: 4 }}>
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            spaceBetween={20}
+            slidesPerView={3}
+            pagination={{ clickable: true }}
+            loop={true}
+            autoplay={{ delay: 4000 }}
+            breakpoints={{
+              960: { slidesPerView: 3 },
+              600: { slidesPerView: 2 },
+              0: { slidesPerView: 1 },
+            }}
+          >
             {categories.map((category, index) => (
-              <Box key={index} sx={{ px: 1 }}>
-                <Card
-                  sx={{
-                    position: "relative",
-                    borderRadius: "12px",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                    overflow: "hidden",
-                  }}
+              <SwiperSlide key={index}>
+                {/* Flip Animation for Cards */}
+                <motion.div
+                  initial={{ rotateY: 90, opacity: 0 }}
+                  animate={{ rotateY: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
                 >
-                  <CardMedia component="img" height="180" image={category.img} alt={category.title} />
-
-                  {/* Custom Title Strip */}
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      bottom: "20px",
-                      left: 0,
-                      width: "75%",
-                      backgroundColor: "rgba(255, 255, 255, 0.9)",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "8px 16px",
-                      borderRadius: "0px 8px 8px 0px",
-                      boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.2)",
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ fontWeight: "bold", color: "#000" }}>
-                      {category.title}
-                    </Typography>
-                    <Box
+                  <Box sx={{ px: 1 }}>
+                    <Card
                       sx={{
-                        backgroundColor: "#000188",
-                        padding: "6px",
-                        borderRadius: "4px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        position: "relative",
+                        borderRadius: "12px",
+                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                        overflow: "hidden",
+                        transition: "transform 0.3s ease-in-out",
+                        "&:hover": { transform: "scale(1.05)" },
                       }}
                     >
-                      {category.icon}
-                    </Box>
+                      <CardMedia component="img" height="200" image={category.img} alt={category.title} />
+
+                      {/* Custom Title Strip - Fixed Placement */}
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          bottom: "20px",
+                          left: 0, // Strip starts from left
+                          width: "80%", // Ends before reaching the right
+                          backgroundColor: "rgba(255, 255, 255, 0.9)",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          padding: "8px 16px",
+                          boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.2)",
+                          borderRadius: "0px 8px 8px 0px",
+                        }}
+                      >
+                        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#000" }}>
+                          {category.title}
+                        </Typography>
+                        <IconButton
+                          sx={{
+                            background: "linear-gradient(135deg,#6a11cb,#000188)",
+                            padding: "6px",
+                            borderRadius: "4px",
+                            "&:hover": { background: "linear-gradient(135deg,#000188,#6a11cb)" },
+                          }}
+                        >
+                          {category.icon}
+                        </IconButton>
+                      </Box>
+                    </Card>
                   </Box>
-                </Card>
-              </Box>
+                </motion.div>
+              </SwiperSlide>
             ))}
-          </Slider>
+          </Swiper>
         </Box>
 
-        {/* Contact Section */}
-        <Typography variant="body1" sx={{ mt: 0, fontWeight: "bold" }}>
-          Since 1964, We provide the best solutions for our valuable customers.
-        </Typography>
-        <Typography variant="body1" sx={{ color: "#4C9BE8", mt: 1 }}> {/* Light Blue for visibility */}
-          ✉ Getaquote@SkyWayTraders.com
-        </Typography>
-
-        {/* Custom Styles for Pagination Dots */}
-        <style>
-          {`
-            .custom-dots {
-              display: flex !important;
-              justify-content: center;
-              gap: 8px; /* Increased spacing between dots */
-              position: relative;
-              top: 25px; /* Moves dots lower */
-            }
-            .custom-dots li {
-              width: auto;
-              height: auto;
-            }
-            .custom-dots li.slick-active div {
-              background-color: #000188 !important; /* Active dot color */
-              width: 12px !important; /* Slightly bigger active dot */
-              height: 12px !important;
-            }
-          `}
-        </style>
+        {/* Contact Section - Slide in from Top */}
+        <motion.div
+          ref={contentRef}
+          initial={{ y: -50, opacity: 0 }}
+          animate={contentInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          <Typography variant="body1" sx={{ mt: 0, fontWeight: "bold" }}>
+            Since 1964, We provide the best solutions for our valuable customers.
+          </Typography>
+          <Typography variant="body1" sx={{ color: "#4C9BE8", mt: 1 }}>
+            ✉ Getaquote@SkyWayTraders.com
+          </Typography>
+        </motion.div>
       </Box>
+
+      {/* Custom Styles for Pagination Dots */}
+      <style>
+        {`
+          .swiper-pagination {
+            position: relative !important;
+            margin-top: 15px !important;
+          }
+          .swiper-pagination-bullet {
+            background: linear-gradient(135deg,#6a11cb, #000188) !important; 
+          }
+          .swiper-pagination-bullet-active {
+            background: linear-gradient(135deg, #6a11cb,#000188);
+          }
+        `}
+      </style>
     </Box>
   );
 };

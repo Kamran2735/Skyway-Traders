@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Typography, Button, IconButton } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import Slider from "react-slick";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -22,15 +24,15 @@ const CustomPrevArrow = (props) => {
         bottom: "15px",
         right: "70px",
         zIndex: 2,
-        backgroundColor: "#000188",
+        background: "linear-gradient(135deg,#000188,#6a11cb)",
         border: "1px solid #4C4CC4",
         width: "45px",
         height: "45px",
-        borderRadius: "0px", // ✅ Makes it square
-        "&:hover": { backgroundColor: "#4C4CC4", border: "1px solid #000188", color: "white" },
+        borderRadius: "0px",
+        "&:hover": { background: "linear-gradient(135deg, #6a11cb,#000188)", border: "1px solid #000188", color: "white" },
       }}
     >
-      <ChevronLeft sx={{ fontSize: 28, color: "white", }} />
+      <ChevronLeft sx={{ fontSize: 28, color: "white" }} />
     </IconButton>
   );
 };
@@ -45,26 +47,27 @@ const CustomNextArrow = (props) => {
         bottom: "15px",
         right: "15px",
         zIndex: 2,
-        backgroundColor: "#000188",
+        background: "linear-gradient(135deg,#000188,#6a11cb)",
         border: "1px solid #4C4CC4",
         width: "45px",
         height: "45px",
-        borderRadius: "0px", // ✅ Makes it square
-        "&:hover": { backgroundColor: "#4C4CC4", border: "1px solid #000188", color: "white" },
+        borderRadius: "0px",
+        "&:hover": { background: "linear-gradient(135deg, #6a11cb,#000188)", border: "1px solid #000188", color: "white" },
       }}
     >
-      <ChevronRight sx={{ fontSize: 28, color: "white", }} />
+      <ChevronRight sx={{ fontSize: 28, color: "white" }} />
     </IconButton>
   );
 };
 
 const HeroSection = () => {
-  // React-Slick Settings
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 1, // ✅ Only shows ONE image per slide
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
@@ -74,118 +77,140 @@ const HeroSection = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        alignItems: "center",
-        maxWidth: "1200px",
-        mx: "auto",
-        mt: 2, 
-        mb: 2, 
-      }}
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : {}}
+      transition={{ duration: 1, ease: "easeOut" }}
     >
-      {/* Left Side - Image Slider */}
       <Box
         sx={{
-          flex: "1",
-          maxWidth: "50%",
-          minWidth: "400px",
-          height: "500px",
-          overflow: "hidden",
-          borderRadius: "0px",
-          pr: 2,
-          position: "relative",
-        }}
-      >
-        <Slider {...settings}>
-          {slides.map((image, index) => (
-            <Box
-              key={index}
-              sx={{
-                width: "100%",
-                height: "500px",
-                overflow: "hidden",
-              }}
-            >
-              <img
-                src={image}
-                alt={`slide-${index}`}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </Box>
-          ))}
-        </Slider>
-      </Box>
-
-           {/* Right Side - Background Image with Hover Scale Effect */}
-      <Box
-        sx={{
-          flex: "1",
-          maxWidth: "50%",
-          minWidth: "400px",
-          height: "500px",
-          position: "relative",
-          borderRadius: "0px",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
+          flexWrap: "nowrap",
+          justifyContent: "center",
           alignItems: "center",
-          overflow: "hidden",
-          "::after": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundImage: `url(${bannerImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            transition: "transform 0.3s ease-in-out",
-            zIndex: -1, // ✅ Keeps it behind the text and button
-          },
-          "&:hover::after": {
-            transform: "scale(1.1)", // ✅ Scales only the image
-          },
+          maxWidth: "1200px",
+          mx: "auto",
+          mt: 2,
+          mb: 2,
+          gap: "20px",
         }}
       >
-        {/* Text at Top Center */}
-        <Box sx={{ textAlign: "center", width: "100%", mt: 3 }}>
-          <Typography variant="h4" sx={{ fontWeight: "bold", fontFamily: "serif" }}>
-            Exceptional
-          </Typography>
-          <Typography variant="h6" sx={{ color: "#000188" }}>
-            OFFICE CHAIR
-          </Typography>
-        </Box>
-
-        {/* Button at Bottom Right */}
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "15px",
-            right: "15px",
-          }}
+        {/* Left Side - Image Slider */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ flex: "1", maxWidth: "50%" }}
         >
-          <Button
-            variant="contained"
+          <Box
             sx={{
-              backgroundColor: "#000188",
-              color: "white",
-              "&:hover": { backgroundColor: "#4C4CC4" },
+              width: "100%",
+              height: "500px",
+              overflow: "hidden",
+              borderRadius: "0px",
+              position: "relative",
             }}
           >
-            SHOP NOW
-          </Button>
-        </Box>
+            <Slider {...settings}>
+              {slides.map((image, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    width: "100%",
+                    minWidth: "100%", // ✅ Ensures each slide is 100% width
+                    height: "500px",
+                    overflow: "hidden",
+                    padding: 0, // ✅ Removes unwanted spacing
+                  }}
+                >
+                  <img
+                    src={image}
+                    alt={`slide-${index}`}
+                    style={{
+                      width: "100%", // ✅ Ensures full width usage
+                      height: "100%",
+                      objectFit: "cover", // ✅ Prevents white gaps & second image peeking
+                      display: "block",
+                    }}
+                  />
+                </Box>
+              ))}
+            </Slider>
+          </Box>
+        </motion.div>
+
+        {/* Right Side - Background Image with Hover Scale Effect */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          style={{ flex: "1", maxWidth: "50%" }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              height: "500px",
+              position: "relative",
+              borderRadius: "0px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              overflow: "hidden",
+              "::after": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundImage: `url(${bannerImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                transition: "transform 0.3s ease-in-out",
+                zIndex: -1,
+              },
+              "&:hover::after": {
+                transform: "scale(1.1)",
+              },
+            }}
+          >
+            {/* Text at Top Center */}
+            <Box sx={{ textAlign: "center", width: "100%", mt: 3 }}>
+              <Typography variant="h4" sx={{ fontWeight: "bold", fontFamily: "serif" }}>
+                Exceptional
+              </Typography>
+              <Typography variant="h6" sx={{ color: "#000188" }}>
+                OFFICE CHAIR
+              </Typography>
+            </Box>
+
+            {/* Button at Bottom Right */}
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: "15px",
+                right: "15px",
+              }}
+            >
+              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "linear-gradient(135deg,#000188,#6a11cb)",
+                    color: "white",
+                    "&:hover": { background: "linear-gradient(135deg, #6a11cb,#000188)" },
+                  }}
+                >
+                  SHOP NOW
+                </Button>
+              </motion.div>
+            </Box>
+          </Box>
+        </motion.div>
       </Box>
-    </Box>
+    </motion.div>
   );
 };
 
