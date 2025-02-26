@@ -69,10 +69,10 @@ const Bestseller = () => {
         {/* Left: Title & Separator */}
         <Box sx={{ display: "flex", alignItems: "center", gap: "20px", flex: 1 }}>
           <Box>
-            <Typography variant="subtitle2" sx={{ color: "#888", textTransform: "uppercase" }}>
+            <Typography variant="subtitle2" sx={{ color: "#4C4CC4", textTransform: "uppercase" }}>
               A Wide Selection of Items
             </Typography>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+            <Typography variant="h5" sx={{ fontWeight: "bold" ,color:"#000188" }}>
               Bestseller Products
             </Typography>
           </Box>
@@ -83,16 +83,25 @@ const Bestseller = () => {
 
         {/* ✅ Tabs Styled Correctly */}
         <Tabs
-          value={selectedTab}
-          onChange={(event, newValue) => setSelectedTab(newValue)}
-          textColor="primary"
-          indicatorColor="primary"
-          sx={{
-            "& .MuiTab-root": { fontWeight: "bold", color: "#777", textTransform: "uppercase" },
-            "& .Mui-selected": { color: "#007bff", fontWeight: "bold" },
-            "& .MuiTabs-indicator": { backgroundColor: "#007bff", height: "3px" }, // Blue Underline
-          }}
-        >
+  value={selectedTab}
+  onChange={(event, newValue) => setSelectedTab(newValue)}
+  textColor="primary"
+  indicatorColor="primary"
+  sx={{
+    "& .MuiTab-root": {  
+      color: "#000188", // Default text color
+      textTransform: "uppercase" 
+    },
+    "& .Mui-selected": { 
+      color: "#000188", // Selected tab text color (blue)
+      fontWeight: "bold" 
+    },
+    "& .MuiTabs-indicator": { 
+      background: "linear-gradient(135deg, #000188, #6a11cb)", // Gradient indicator
+      height: "3px" // Thickness
+    },
+  }}
+>
           <Tab label="Top" value="top" />
           <Tab label="Phones & Tablets" value="phones" />
           <Tab label="Laptops & Computers" value="laptops" />

@@ -78,7 +78,7 @@ padding: isMobile
             sx={{
               fontSize: "0.75rem",
               color: "#fff",
-              backgroundColor: "#4C4CC4",
+              background: "linear-gradient(135deg, #6a11cb,#000188)",
               borderRadius: "4px",
               paddingX: "10px",
               minWidth: isMobile ? "40px" : "120px", // Adjusted width for icon only on mobile
@@ -92,7 +92,7 @@ padding: isMobile
                 alignItems: "center",
                 justifyContent: "center", // Center the icon
               },
-              "&:hover": { backgroundColor: "#000188" },
+              "&:hover": { background: "linear-gradient(135deg,#000188,#6a11cb)" },
             }}
             IconComponent={(props) => <ExpandMoreIcon {...props} className="arrow" sx={{ transition: "color 0.3s", color: "#000" }} />}
           >

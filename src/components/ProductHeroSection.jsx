@@ -139,11 +139,11 @@ const HeroSection = () => {
             variant="contained"
             sx={{
               marginTop: "15px",
-              backgroundColor: "#D32F2F",
+              background: "linear-gradient(135deg, #000188, #6a11cb)",
               color: "#fff",
               fontSize: "16px",
               padding: "10px 20px",
-              "&:hover": { backgroundColor: "#B71C1C" },
+              "&:hover": { background: "linear-gradient(135deg,  #6a11cb,#000188)" },
             }}
           >
             Start Buying
@@ -219,7 +219,7 @@ const HeroSection = () => {
           left: 0,
           width: "100%",
           padding: "10px 0",
-          backgroundColor: "rgba(0, 0, 0, 0.6)", // ✅ Dark overlay on text only
+          backgroundColor: "rgba(0, 0, 0, 0.7)", // ✅ Dark overlay on text only
           borderBottomLeftRadius: "8px",
           borderBottomRightRadius: "8px",
         }}
@@ -228,7 +228,7 @@ const HeroSection = () => {
           Smartphone Bestseller
         </Typography>
         <Typography variant="body2">Price: $298.99</Typography>
-        <Typography variant="body2" sx={{ fontWeight: "bold", marginTop: "5px" }}>
+        <Typography variant="body2" sx={{ color:"#4C4CC4" ,fontWeight: "bold", marginTop: "5px" }}>
           Pre - Order Now →
         </Typography>
       </Box>

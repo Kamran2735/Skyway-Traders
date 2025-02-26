@@ -42,12 +42,22 @@ const ProductGrid = () => {
     >
       {/* Tabs Navigation */}
       <Box sx={{ borderBottom: 1, borderColor: "divider", marginBottom: "10px" }}>
-        <Tabs
-          value={selectedTab}
-          onChange={(event, newValue) => setSelectedTab(newValue)}
-          textColor="primary"
-          indicatorColor="primary"
-        >
+      <Tabs
+  value={selectedTab}
+  onChange={(event, newValue) => setSelectedTab(newValue)}
+  sx={{
+    '& .MuiTabs-indicator': {
+      background: 'linear-gradient(135deg, #000188, #6a11cb)', // Gradient for indicator
+    },
+    '& .MuiTab-root': {
+      color: '#000188', // Text color stays solid
+    },
+    '& .Mui-selected': {
+      fontWeight: 'bold',
+      color: '#000188', // Ensuring selected tab also has this color
+    },
+  }}
+>
           <Tab label="Featured" value="featured" sx={{ fontWeight: selectedTab === "featured" ? "bold" : "normal" }} />
           <Tab label="On Sale" value="onSale" sx={{ fontWeight: selectedTab === "onSale" ? "bold" : "normal" }} />
           <Tab label="Top Rated" value="topRated" sx={{ fontWeight: selectedTab === "topRated" ? "bold" : "normal" }} />

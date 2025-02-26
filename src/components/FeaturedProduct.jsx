@@ -108,7 +108,7 @@ const HeroSlider = () => {
       zIndex: 3, // Ensures text is above everything
     }}
   >
-    <Typography sx={{ color: "#FFC107", fontSize: "22px", fontWeight: "bold" }}>
+    <Typography sx={{ color: "#4C4CC4", fontSize: "22px", fontWeight: "bold" }}>
       {slide.price} <span style={{ fontSize: "14px" }}>{slide.label}</span>
     </Typography>
 
@@ -123,7 +123,7 @@ const HeroSlider = () => {
     </Typography>
 
     <Box sx={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "20px" }}>
-      <Typography sx={{ fontSize: "24px", fontWeight: "bold", color: "#FFC107" }}>
+      <Typography sx={{ fontSize: "24px", fontWeight: "bold", color: "#4C4CC4" }}>
         {slide.spec}
       </Typography>
       <Box>

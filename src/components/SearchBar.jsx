@@ -77,6 +77,7 @@ const SearchBar = () => {
             endIcon={<ArrowDropDownIcon />}
             sx={{
               color: "#fff",
+              background: "linear-gradient(135deg, #000188, #6a11cb)",
               fontWeight: "bold",
               textTransform: "none",
               fontSize: "0.8rem",
@@ -85,7 +86,7 @@ const SearchBar = () => {
               boxShadow: "0 0 5px #4C4CC4",
               borderRadius: "4px",
               transition: "all 0.3s ease",
-              "&:hover": { backgroundColor: "#4C4CC4" },
+              "&:hover": { background: "linear-gradient(135deg,  #6a11cb,#000188)" },
             }}
           >
             Product Categories
@@ -105,7 +106,7 @@ const SearchBar = () => {
               sx={{
                 fontSize: "0.8rem",
                 transition: "all 0.3s ease",
-                "&:hover": { backgroundColor: "#000188", color: "#ffffff" },
+                "&:hover": {  background: "linear-gradient(135deg, #6a11cb,#000188)", color: "#ffffff" },
               }}
             >
               {category}
@@ -129,7 +130,7 @@ const SearchBar = () => {
             onClick={handleSearchMenuOpen}
             endIcon={<ArrowDropDownIcon sx={{ fontSize: "14px" }} />}
             sx={{
-              backgroundColor: "#4C4CC4",
+              background: "linear-gradient(135deg,#6a11cb, #000188)",
               padding: "4px 8px",
               borderRadius: "4px 0 0 4px",
               color: "#ffffff",
@@ -137,7 +138,7 @@ const SearchBar = () => {
               fontWeight: "bold",
               minWidth: "90px",
               transition: "all 0.3s ease",
-              "&:hover": { backgroundColor: "#000188" },
+              "&:hover": { background: "linear-gradient(135deg, #000188,#6a11cb)" },
             }}
           >
             {selectedCategory}
@@ -156,7 +157,7 @@ const SearchBar = () => {
                 sx={{
                   fontSize: "0.8rem",
                   transition: "all 0.3s ease",
-                  "&:hover": { backgroundColor: "#000188", color: "#ffffff" },
+                  "&:hover": { background: "linear-gradient(135deg, #000188,#6a11cb)", color: "#ffffff" },
                 }}
               >
                 {category}
@@ -179,11 +180,11 @@ const SearchBar = () => {
           <IconButton
             onClick={handleSearch}
             sx={{
-              backgroundColor: "#4C4CC4",
+              background: "linear-gradient(135deg, #6a11cb,#000188)",
               borderRadius: "0 4px 4px 0",
               padding: "6px",
               transition: "all 0.3s ease",
-              "&:hover": { backgroundColor: "#000188" },
+              "&:hover": { background: "linear-gradient(135deg, #000188,#6a11cb)" },
             }}
           >
             <SearchIcon sx={{ color: "#fff", fontSize: "1.3rem" }} />
@@ -198,6 +199,7 @@ const SearchBar = () => {
             sx={{
               color: "#fff",
               fontWeight: "bold",
+              background: "linear-gradient(135deg, #000188,#6a11cb)",
               textTransform: "none",
               fontSize: "0.8rem",
               height: "100%",
@@ -206,7 +208,7 @@ const SearchBar = () => {
               borderRadius: "4px",
               padding: "4px 8px",
               transition: "all 0.3s ease",
-              "&:hover": { backgroundColor: "#4C4CC4" },
+              "&:hover": { background: "linear-gradient(135deg,#6a11cb, #000188)" },
             }}
           >
             Cart
