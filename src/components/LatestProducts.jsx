@@ -9,12 +9,12 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-import slide1 from "../assets/product-1.jpg";
-import slide2 from "../assets/product-2.jpeg";
-import slide3 from "../assets/product-3.jpg";
-import slide4 from "../assets/product-1.jpg";
-import slide5 from "../assets/product-3.jpg";
-import backgroundImg from "../assets/product-bg.jpeg"; // Background image
+import slide1 from "../assets/Home/product-1.jpg";
+import slide2 from "../assets/Home/product-2.jpeg";
+import slide3 from "../assets/Home/product-3.jpg";
+import slide4 from "../assets/Home/product-1.jpg";
+import slide5 from "../assets/Home/product-3.jpg";
+import backgroundImg from "../assets/Home/product-bg.jpeg"; // Background image
 
 const products = [
   { title: "Product 1", category: "Category 1", img: slide1, link: "/product/1" },

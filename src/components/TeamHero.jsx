@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import backgroundImg from "../assets/team-bg.jpg"; // Replace with actual image path
+import backgroundImg from "../assets/Team/team-bg.jpg"; // Replace with actual image path
 
 const GetInTouch = () => {
   return (

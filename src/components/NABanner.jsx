@@ -3,8 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-import banner1 from "../assets/NABanner1.webp"; // First Banner Image
-import banner2 from "../assets/NABanner2.webp"; // Second Banner Image
+import banner1 from "../assets/New_Arrivals/NABanner1.webp"; // First Banner Image
+import banner2 from "../assets/New_Arrivals/NABanner2.webp"; // Second Banner Image
 
 const BannerSection = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });

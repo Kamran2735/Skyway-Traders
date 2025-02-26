@@ -5,10 +5,10 @@ import Slider from "react-slick";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-import person1 from "../assets/Person1.png";
-import person2 from "../assets/Person2.png";
-import person3 from "../assets/Person3.png";
-import person4 from "../assets/Person4.png";
+import person1 from "../assets/Team/Person1.png";
+import person2 from "../assets/Team/Person2.png";
+import person3 from "../assets/Team/Person3.png";
+import person4 from "../assets/Team/Person4.png";
 
 const teamMembers = [
   {

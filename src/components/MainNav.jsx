@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Box, Typography, Menu, MenuItem, useMediaQuery, IconBu
 import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import logo from "../assets/STLogo.png";
+import logo from "../assets/Home/STLogo.png";
 
 const categories = ["All", "Category 1", "Category 2", "Category 3", "Category 4"];
 const navOptions = ["Overview", "New Arrivals", "Products", "Contact"];

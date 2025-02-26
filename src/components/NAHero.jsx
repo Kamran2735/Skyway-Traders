@@ -8,9 +8,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Import Images
-import slide1 from "../assets/NA1.jpg";
-import slide2 from "../assets/NA2.jpg";
-import bannerImg from "../assets/NA4.webp";
+import slide1 from "../assets/New_Arrivals/NA1.jpg";
+import slide2 from "../assets/New_Arrivals/NA2.jpg";
+import bannerImg from "../assets/New_Arrivals/NA4.webp";
 
 const slides = [slide1, slide2];
 

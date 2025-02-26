@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import backgroundImg from "../assets/cat-bg.webp"; // Replace with actual image path
+import backgroundImg from "../assets/Categories/cat-bg.webp"; // Replace with actual image path
 
 const CategoryHero = () => {
   return (

@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 // Import Product Images
-import product1 from "../assets/NAproduct-1.webp";
-import product2 from "../assets/NAproduct-2.webp";
-import product3 from "../assets/NAproduct-3.webp";
-import product4 from "../assets/NAproduct-4.webp";
-import product5 from "../assets/NAproduct-5.webp";
+import product1 from "../assets/New_Arrivals/NAproduct-1.webp";
+import product2 from "../assets/New_Arrivals/NAproduct-2.webp";
+import product3 from "../assets/New_Arrivals/NAproduct-3.webp";
+import product4 from "../assets/New_Arrivals/NAproduct-4.webp";
+import product5 from "../assets/New_Arrivals/NAproduct-5.webp";
 
 const products = [
   { id: 1, name: "Easy Modern Chair", price: "$40.00", oldPrice: "$45.00", discount: "-10%", image: product1, size: "large" },

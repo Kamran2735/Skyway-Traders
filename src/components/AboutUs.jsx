@@ -3,7 +3,7 @@ import { Box, Grid, Typography, Card, CardContent } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CountUp from "react-countup"; // Import CountUp
 import { motion } from "framer-motion"; // Import Framer Motion
-import aboutImage from "../assets/aboutus_bg.png"; // Update with actual image path
+import aboutImage from "../assets/About/aboutus_bg.png"; // Update with actual image path
 
 const aboutStats = [
   { value: 247, label: "Completed Projects" },

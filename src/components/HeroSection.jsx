@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import slide1 from "../assets/slide-2.jpg";
-import slide2 from "../assets/slide-1.jpg";
-import slide3 from "../assets/slide-3.jpg";
+import slide1 from "../assets/Home/slide-2.jpg";
+import slide2 from "../assets/Home/slide-1.jpg";
+import slide3 from "../assets/Home/slide-3.jpg";
 
 const slides = [
   { image: slide1, text: "Discover Our Latest Collection", link: "/products" },

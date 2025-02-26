@@ -8,15 +8,15 @@ import { Card, Typography, Avatar, Box, Rating, useMediaQuery } from "@mui/mater
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-import pic1 from "../assets/person-1.png";
-import pic2 from "../assets/person-2.png";
-import pic3 from "../assets/person-3.png";
-import pic4 from "../assets/person-4.png";
+import pic1 from "../assets/Testimonials/person-1.png";
+import pic2 from "../assets/Testimonials/person-2.png";
+import pic3 from "../assets/Testimonials/person-3.png";
+import pic4 from "../assets/Testimonials/person-4.png";
 
-import logopic1 from "../assets/cl1.png";
-import logopic2 from "../assets/cl2.png";
-import logopic3 from "../assets/cl3.png";
-import logopic4 from "../assets/cl4.png";
+import logopic1 from "../assets/Testimonials/cl1.png";
+import logopic2 from "../assets/Testimonials/cl2.png";
+import logopic3 from "../assets/Testimonials/cl3.png";
+import logopic4 from "../assets/Testimonials/cl4.png";
 
 const testimonials = [
   {

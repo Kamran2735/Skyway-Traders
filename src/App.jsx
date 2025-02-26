@@ -6,6 +6,7 @@ import Overview from "./pages/Overview"; // ✅ Import the Overview component
 import About from "./pages/About"; // ✅ Import the About component
 import Why_Choose_Us from "./pages/Why_Choose_Us"; // ✅ Import the Why_Choose_Us component
 import Category from "./pages/Category"; // ✅ Import the Category component
+import Products from "./pages/Products"; // ✅ Import the Products component
 import New_Arrivals from "./pages/New_Arrivals"; // ✅ Import the New_Arrivals component
 import Contact from "./pages/Contact"; // ✅ Import the Contact component
 import Team from "./pages/Team"; // ✅ Import the Team component
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/About" element={<About />}/>
           <Route path="/Why_Choose_Us" element={<Why_Choose_Us />}/>
           <Route path="/Category" element={<Category />}/>
+          <Route path="/Products" element={<Products />}/>
           <Route path="/New_Arrivals" element={<New_Arrivals />}/>
           <Route path="/Contact" element={<Contact />}/>
           <Route path="/Team" element={<Team />}/>

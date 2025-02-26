@@ -6,12 +6,12 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 // Import Images
-import product1 from "../assets/Cat1.jpg";
-import product2 from "../assets/Cat2.webp";
-import product3 from "../assets/Cat3.webp";
-import product4 from "../assets/NAProduct-2.webp";
-import product5 from "../assets/NAProduct-3.webp";
-import product6 from "../assets/NAProduct-4.webp";
+import product1 from "../assets/Categories/Cat1.jpg";
+import product2 from "../assets/Categories/Cat2.webp";
+import product3 from "../assets/Categories/Cat3.webp";
+import product4 from "../assets/New_Arrivals/NAProduct-2.webp";
+import product5 from "../assets/New_Arrivals/NAProduct-3.webp";
+import product6 from "../assets/New_Arrivals/NAProduct-4.webp";
 
 // Dummy Category Data (Replace with API Data)
 const categories = [

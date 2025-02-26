@@ -11,10 +11,10 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
 // Sample category images
-import Cat3 from "../assets/Cat1.jpg";
-import Cat2 from "../assets/Cat2.webp";
-import Cat1 from "../assets/Cat3.webp";
-import BgImage from "../assets/bg1.jpg"; // Background image
+import Cat3 from "../assets/Categories/Cat1.jpg";
+import Cat2 from "../assets/Categories/Cat2.webp";
+import Cat1 from "../assets/Categories/Cat3.webp";
+import BgImage from "../assets/Home/bg1.jpg"; // Background image
 
 // Sample category data
 const categories = [
@@ -96,62 +96,67 @@ const ProductCategory = () => {
               0: { slidesPerView: 1 },
             }}
           >
-            {categories.map((category, index) => (
-              <SwiperSlide key={index}>
-                {/* Flip Animation for Cards */}
-                <motion.div
-                  initial={{ rotateY: 90, opacity: 0 }}
-                  animate={{ rotateY: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                >
-                  <Box sx={{ px: 1 }}>
-                    <Card
-                      sx={{
-                        position: "relative",
-                        borderRadius: "12px",
-                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                        overflow: "hidden",
-                        transition: "transform 0.3s ease-in-out",
-                        "&:hover": { transform: "scale(1.05)" },
-                      }}
-                    >
-                      <CardMedia component="img" height="200" image={category.img} alt={category.title} />
+            {categories.map((category, index) => {
+              const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
-                      {/* Custom Title Strip - Fixed Placement */}
-                      <Box
+              return (
+                <SwiperSlide key={index}>
+                  {/* Flip Animation for Cards - Now triggers when in view */}
+                  <motion.div
+                    ref={ref}
+                    initial={{ rotateY: 90, opacity: 0 }}
+                    animate={inView ? { rotateY: 0, opacity: 1 } : {}}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                  >
+                    <Box sx={{ px: 1 }}>
+                      <Card
                         sx={{
-                          position: "absolute",
-                          bottom: "20px",
-                          left: 0, // Strip starts from left
-                          width: "80%", // Ends before reaching the right
-                          backgroundColor: "rgba(255, 255, 255, 0.9)",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          padding: "8px 16px",
-                          boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.2)",
-                          borderRadius: "0px 8px 8px 0px",
+                          position: "relative",
+                          borderRadius: "12px",
+                          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                          overflow: "hidden",
+                          transition: "transform 0.3s ease-in-out",
+                          "&:hover": { transform: "scale(1.05)" },
                         }}
                       >
-                        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#000" }}>
-                          {category.title}
-                        </Typography>
-                        <IconButton
+                        <CardMedia component="img" height="200" image={category.img} alt={category.title} />
+
+                        {/* Custom Title Strip - Fixed Placement */}
+                        <Box
                           sx={{
-                            background: "linear-gradient(135deg,#6a11cb,#000188)",
-                            padding: "6px",
-                            borderRadius: "4px",
-                            "&:hover": { background: "linear-gradient(135deg,#000188,#6a11cb)" },
+                            position: "absolute",
+                            bottom: "20px",
+                            left: 0, // Strip starts from left
+                            width: "80%", // Ends before reaching the right
+                            backgroundColor: "rgba(255, 255, 255, 0.9)",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            padding: "8px 16px",
+                            boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "0px 8px 8px 0px",
                           }}
                         >
-                          {category.icon}
-                        </IconButton>
-                      </Box>
-                    </Card>
-                  </Box>
-                </motion.div>
-              </SwiperSlide>
-            ))}
+                          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#000" }}>
+                            {category.title}
+                          </Typography>
+                          <IconButton
+                            sx={{
+                              background: "linear-gradient(135deg,#6a11cb,#000188)",
+                              padding: "6px",
+                              borderRadius: "4px",
+                              "&:hover": { background: "linear-gradient(135deg,#000188,#6a11cb)" },
+                            }}
+                          >
+                            {category.icon}
+                          </IconButton>
+                        </Box>
+                      </Card>
+                    </Box>
+                  </motion.div>
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </Box>
 
