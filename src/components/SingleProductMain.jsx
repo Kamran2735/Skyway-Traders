@@ -15,10 +15,11 @@ const SingleProductMain = ({ product }) => {
         <Box sx={{ position: "relative", width: "100%", maxWidth: 500, height: 400, bgcolor: "#fdebed", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
           <img src={selectedImage} alt="Product" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
           <IconButton onClick={() => setOpen(true)} sx={{ position: "absolute", top: 10, left: 10, bgcolor: "white" }}>
-            <ZoomInIcon color="error" />
+          <ZoomInIcon sx={{ color: "#000188" }} />
+
           </IconButton>
         </Box>
-        <Grid container spacing={1} sx={{ marginTop: 2, justifyContent: "center" }}>
+        <Grid container spacing={2} sx={{ marginTop: 1, justifyContent: "center" }}>
           {product.images.map((img, index) => (
             <Grid item key={index}>
               <img
@@ -28,7 +29,7 @@ const SingleProductMain = ({ product }) => {
                   width: 80,
                   height: 80,
                   objectFit: "cover",
-                  border: selectedImage === img ? "2px solid red" : "2px solid transparent",
+                  border: selectedImage === img ? "2px solid #000188" : "2px solid transparent",
                   cursor: "pointer",
                 }}
                 onClick={() => setSelectedImage(img)}
@@ -40,28 +41,36 @@ const SingleProductMain = ({ product }) => {
 
       {/* Product Details Section */}
       <Grid item xs={12} md={6} sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography variant="h5" fontWeight="bold" sx={{ fontSize: "1.8rem", marginBottom: 1 }}>{product.title}</Typography>
-        <Typography variant="h6" color="error" fontWeight="bold" sx={{ fontSize: "1.5rem", marginBottom: 1 }}>
-          ${product.discountedPrice} <Typography component="span" sx={{ textDecoration: "line-through", color: "gray", fontSize: "1rem" }}>${product.originalPrice}</Typography>
+        <Typography variant="h5" fontWeight="bold" sx={{ fontSize: "1.8rem", marginBottom: 1 , color: "#000188" }}>{product.title}</Typography>
+        <Typography variant="h6" color="error" fontWeight="bold" sx={{ fontSize: "1.5rem", marginBottom: 1, color: "#000188"}}>
+          ${product.discountedPrice} <Typography component="span" sx={{ textDecoration: "line-through", color: "#4C4CC4", fontSize: "1rem" }}>${product.originalPrice}</Typography>
         </Typography>
-        <Rating value={product.rating} readOnly size="medium" /> ({product.reviews} Reviews)
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+  <Rating value={product.rating} readOnly size="medium" />
+  <Typography sx={{ color: "#4C4CC4", marginLeft: 1 }}>
+    ({product.reviews} Reviews)
+  </Typography>
+</Box>
+
         <Typography variant="body1" sx={{ marginTop: 1, fontSize: "1.1rem" }}>{product.description}</Typography>
         
         {/* Quantity and Cart Actions */}
         <Box sx={{ display: "flex", alignItems: "center", marginTop: 2, gap: 2 }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Button onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</Button>
-            <Typography sx={{ marginX: 2, fontSize: "1.1rem" }}>{quantity}</Typography>
-            <Button onClick={() => setQuantity(quantity + 1)}>+</Button>
-          </Box>
-          <Button variant="contained" color="error" sx={{ fontSize: "1rem" }}>Add to Cart</Button>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+  <Button sx={{ color: "#4C4CC4" }} onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</Button>
+  <Typography sx={{ marginX: 2, fontSize: "1.1rem", color: "#000188" }}>{quantity}</Typography>
+  <Button sx={{ color: "#4C4CC4" }} onClick={() => setQuantity(quantity + 1)}>+</Button>
+</Box>
+
+          <Button variant="contained"  sx={{ fontSize: "1rem", background: "linear-gradient(135deg, #000188, #6a11cb)" ,transition: "all 0.3s ease",
+              "&:hover": { background: "linear-gradient(135deg,  #6a11cb,#000188)" },}}>Add to Cart</Button>
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center", marginTop: 2, gap: 1 }}>
           <IconButton>
             <FavoriteBorderIcon />
           </IconButton>
-          <Typography variant="body1" sx={{ fontSize: "1.1rem" }}>Add to Wishlist</Typography>
+          <Typography variant="body1" sx={{ fontSize: "1.1rem" ,color: "#4C4CC4"}}>Add to Wishlist</Typography>
         </Box>
         
         {/* Additional Details */}
